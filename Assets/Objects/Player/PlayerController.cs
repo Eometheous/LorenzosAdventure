@@ -2,15 +2,16 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class PlayerController : MonoBehaviour
 {
-    private readonly float movementSpeed = 10f;
-    private readonly float jumpForceGround = 100f;
-    private readonly float jumpForceAir = 7;
+    private readonly float movementForce = 10f;
+    private readonly float airMovementForce = 4f;
+    private readonly float jumpVelocity = 140f;
+    private readonly float jumpForceAir = 7f;
     private Rigidbody2D rb;
     private Vector2 movementDirection;
-
     private bool touchingGround;
     private bool jumping;
 
@@ -25,18 +26,25 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        movementDirection = new Vector2(Input.GetAxis("Horizontal"), 0).normalized;
+        movementDirection = new Vector2(Input.GetAxis("Horizontal"), 0);
         if (Input.GetAxis("Vertical") > 0) jumping = true;
         else jumping = false;
+
+        if (rb.velocity.x < 0) GetComponent<SpriteRenderer>().flipX = true;
+        else if (rb.velocity.x > 0) GetComponent<SpriteRenderer>().flipX = false;
     }
 
     void FixedUpdate() 
     {
+        Vector2 force = Vector2.zero;
+        
         if (touchingGround) {
-            rb.AddForce((movementDirection * movementSpeed) - rb.velocity);
-            if (jumping) rb.AddForce(Vector2.up * jumpForceGround);
+            force += movementDirection * movementForce - rb.velocity;
+            if (jumping) force += Vector2.up * jumpVelocity;
         }
-        if (jumping && rb.velocity.y > 1.5) rb.AddForce(Vector2.up * jumpForceAir);
+        else force += movementDirection * airMovementForce - rb.velocity;
+        rb.AddForce(force);
+        if (jumping && rb.velocity.y > 0) rb.AddForce(Vector2.up * jumpForceAir);
     }
     
     private void OnCollisionEnter2D(Collision2D other)
