@@ -14,6 +14,7 @@ public class PlayerController : MonoBehaviour
     private Vector2 movementDirection;
     private bool touchingGround;
     private bool jumping;
+    private bool ignorePlatform;
 
     // Start is called before the first frame update
     void Start()
@@ -38,13 +39,17 @@ public class PlayerController : MonoBehaviour
     {
         Vector2 force = Vector2.zero;
         
-        if (touchingGround) {
+        if (touchingGround) 
+        {
             force += movementDirection * movementForce - rb.velocity;
             if (jumping) force += Vector2.up * jumpVelocity;
         }
         else force += movementDirection * airMovementForce - rb.velocity;
         rb.AddForce(force);
         if (jumping && rb.velocity.y > 0) rb.AddForce(Vector2.up * jumpForceAir);
+        
+        ignorePlatform = rb.velocity.y > 0 || Input.GetAxis("Vertical") < 0; 
+        Physics2D.IgnoreLayerCollision(6, 7, ignorePlatform);
     }
     
     private void OnCollisionEnter2D(Collision2D other)
