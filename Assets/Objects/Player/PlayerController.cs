@@ -22,6 +22,7 @@ public class PlayerController : MonoBehaviour
         touchingGround = false;
         jumping = false;
         rb = GetComponent<Rigidbody2D>();
+        Physics2D.IgnoreLayerCollision(6,1, true);
     }
 
     // Update is called once per frame
