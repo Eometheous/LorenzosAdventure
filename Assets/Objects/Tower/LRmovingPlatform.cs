@@ -28,15 +28,6 @@ public class MovingPlatform : MonoBehaviour
         if (other.gameObject.CompareTag("Bounds")) 
         {
             rb.velocity *= -1;
-            // if (left) {
-            //     rb.velocity = Vector2.right * speed;
-            //     left = false;
-            // }
-            // else {
-            //     rb.velocity = Vector2.left * speed;
-            //     left = true;
-            // }
-            
         }
     }
 }
