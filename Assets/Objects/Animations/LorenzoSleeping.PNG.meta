@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 1ec860bed01f6446592c08918640a154
+guid: 1a3efd35209d441d3949bef016f467ba
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -49,7 +49,7 @@ TextureImporter:
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
   spritePixelsToUnits: 32
-  spriteBorder: {x: 0, y: 0, z: 96, w: 0}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
   alphaIsTransparency: 1
@@ -110,7 +110,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: LorenzoIdle_0
+      name: LorenzoSleeping_0
       rect:
         serializedVersion: 2
         x: 0
@@ -124,14 +124,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c9099f1c220cd4e1689d18b33bc574a3
-      internalID: 341825923
+      spriteID: 7c46ba196e9504f90bdd9b5f24e5b393
+      internalID: -1432529001
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: LorenzoIdle_1
+      name: LorenzoSleeping_1
       rect:
         serializedVersion: 2
         x: 32
@@ -145,14 +145,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 518fd8b1965884de888a6a43d620d74c
-      internalID: 1243346516
+      spriteID: bbd45477151f5417f89c5b3316cbcd75
+      internalID: 95614820
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: LorenzoIdle_2
+      name: LorenzoSleeping_2
       rect:
         serializedVersion: 2
         x: 64
@@ -166,29 +166,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 58d3af2ac7a4144c6a9018515aee14bd
-      internalID: 878897421
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: LorenzoIdle_3
-      rect:
-        serializedVersion: 2
-        x: 96
-        y: 0
-        width: 32
-        height: 32
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: a2718ed9d4843484ab33311d99313a5e
-      internalID: 1595129894
+      spriteID: 87926d2f808264cf19ad755c5a7f5e2f
+      internalID: 1269542504
       vertices: []
       indices: 
       edges: []
@@ -197,17 +176,16 @@ TextureImporter:
     physicsShape: []
     bones: []
     spriteID: 5e97eb03825dee720800000000000000
-    internalID: 1537655665
+    internalID: 0
     vertices: []
     indices: 
     edges: []
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      LorenzoIdle_0: 341825923
-      LorenzoIdle_1: 1243346516
-      LorenzoIdle_2: 878897421
-      LorenzoIdle_3: 1595129894
+      LorenzoSleeping_0: -1432529001
+      LorenzoSleeping_1: 95614820
+      LorenzoSleeping_2: 1269542504
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

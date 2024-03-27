@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 1ec860bed01f6446592c08918640a154
+guid: 9435a04115cb34bfdb4cc256f4005df8
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -49,7 +49,7 @@ TextureImporter:
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
   spritePixelsToUnits: 32
-  spriteBorder: {x: 0, y: 0, z: 96, w: 0}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
   alphaIsTransparency: 1
@@ -110,7 +110,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: LorenzoIdle_0
+      name: LorenzoRunning_0
       rect:
         serializedVersion: 2
         x: 0
@@ -124,14 +124,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c9099f1c220cd4e1689d18b33bc574a3
-      internalID: 341825923
+      spriteID: 89817a174ef0943688ac73fc0540b081
+      internalID: -2064370812
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: LorenzoIdle_1
+      name: LorenzoRunning_1
       rect:
         serializedVersion: 2
         x: 32
@@ -145,14 +145,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 518fd8b1965884de888a6a43d620d74c
-      internalID: 1243346516
+      spriteID: 26576697714ad49778fc823e266982af
+      internalID: -1686224940
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: LorenzoIdle_2
+      name: LorenzoRunning_2
       rect:
         serializedVersion: 2
         x: 64
@@ -166,14 +166,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 58d3af2ac7a4144c6a9018515aee14bd
-      internalID: 878897421
+      spriteID: d74de66f880e441abb21a89427bac212
+      internalID: -1254326884
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: LorenzoIdle_3
+      name: LorenzoRunning_3
       rect:
         serializedVersion: 2
         x: 96
@@ -187,8 +187,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a2718ed9d4843484ab33311d99313a5e
-      internalID: 1595129894
+      spriteID: 6f96d9fd8f1d242a68ab4ab00916b562
+      internalID: 1622354488
       vertices: []
       indices: 
       edges: []
@@ -197,17 +197,17 @@ TextureImporter:
     physicsShape: []
     bones: []
     spriteID: 5e97eb03825dee720800000000000000
-    internalID: 1537655665
+    internalID: 0
     vertices: []
     indices: 
     edges: []
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      LorenzoIdle_0: 341825923
-      LorenzoIdle_1: 1243346516
-      LorenzoIdle_2: 878897421
-      LorenzoIdle_3: 1595129894
+      LorenzoRunning_0: -2064370812
+      LorenzoRunning_1: -1686224940
+      LorenzoRunning_2: -1254326884
+      LorenzoRunning_3: 1622354488
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

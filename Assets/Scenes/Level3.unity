@@ -717,6 +717,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SolidBlock
       objectReference: {fileID: 0}
+    - target: {fileID: 3747748491925523187, guid: c1b53f4c6474a4ef290d89acacd73e3d, type: 3}
+      propertyPath: m_TagString
+      value: Untagged
+      objectReference: {fileID: 0}
     - target: {fileID: 8724094969404704685, guid: c1b53f4c6474a4ef290d89acacd73e3d, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0

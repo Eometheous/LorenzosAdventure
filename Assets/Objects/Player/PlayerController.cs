@@ -1,6 +1,8 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Mathematics;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -10,11 +12,17 @@ public class PlayerController : MonoBehaviour
     private readonly float airMovementForce = 4f;
     private readonly float jumpVelocity = 140f;
     private readonly float jumpForceAir = 7f;
-    private Rigidbody2D rb;
+    public Rigidbody2D rb;
     private Vector2 movementDirection;
     private bool touchingGround;
     private bool jumping;
     private bool ignorePlatform;
+    private float idleTime;
+    public Animator animator;
+    public AudioSource audioSource;
+    public AudioClip clip1;
+    private float timeSinceMeow;
+    private bool playingMeow;
 
     // Start is called before the first frame update
     void Start()
@@ -23,6 +31,9 @@ public class PlayerController : MonoBehaviour
         jumping = false;
         rb = GetComponent<Rigidbody2D>();
         Physics2D.IgnoreLayerCollision(6,1, true);
+        animator = GetComponent<Animator>();
+        audioSource = GetComponent<AudioSource>();
+        playingMeow = false;
     }
 
     // Update is called once per frame
@@ -34,6 +45,9 @@ public class PlayerController : MonoBehaviour
 
         if (rb.velocity.x < 0) GetComponent<SpriteRenderer>().flipX = true;
         else if (rb.velocity.x > 0) GetComponent<SpriteRenderer>().flipX = false;
+        animator.SetFloat("Speed", Math.Abs(rb.velocity.x));
+        animator.SetBool("OnGround", touchingGround);
+        animator.SetFloat("IdleTime", idleTime);
     }
 
     void FixedUpdate() 
@@ -51,6 +65,18 @@ public class PlayerController : MonoBehaviour
         
         ignorePlatform = rb.velocity.y > 0 || Input.GetAxis("Vertical") < 0; 
         Physics2D.IgnoreLayerCollision(6, 7, ignorePlatform);
+
+        idleTime += Time.deltaTime;
+        if (math.abs(rb.velocity.x) > 0 || math.abs(rb.velocity.y) > 0) idleTime = 0;
+
+        timeSinceMeow += Time.deltaTime;
+        if (timeSinceMeow > 10 && !playingMeow) {
+            audioSource.Play();
+            audioSource.PlayOneShot
+            playingMeow = true;
+            timeSinceMeow = 0;
+        }
+        else playingMeow = false;
     }
     
     private void OnCollisionEnter2D(Collision2D other)
