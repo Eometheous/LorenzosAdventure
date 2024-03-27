@@ -72,7 +72,6 @@ public class PlayerController : MonoBehaviour
         timeSinceMeow += Time.deltaTime;
         if (timeSinceMeow > 10 && !playingMeow) {
             audioSource.Play();
-            audioSource.PlayOneShot
             playingMeow = true;
             timeSinceMeow = 0;
         }
