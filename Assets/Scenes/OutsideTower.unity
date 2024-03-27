@@ -899,6 +899,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Lorenzo
       objectReference: {fileID: 0}
+    - target: {fileID: 6542504850452945478, guid: bc6732622dd6f4474b576bf533245aed, type: 3}
+      propertyPath: Loop
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8828605262832410782, guid: bc6732622dd6f4474b576bf533245aed, type: 3}
       propertyPath: m_LocalPosition.x
       value: -7.7

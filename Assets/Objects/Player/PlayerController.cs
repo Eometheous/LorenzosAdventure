@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Security.Cryptography;
 using Unity.Mathematics;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -20,7 +21,9 @@ public class PlayerController : MonoBehaviour
     private float idleTime;
     public Animator animator;
     public AudioSource audioSource;
-    public AudioClip clip1;
+    public AudioClip lorenzoMeow1;
+    public AudioClip lorenzoMeow2;
+    public AudioClip lorenzoPurring;
     private float timeSinceMeow;
     private bool playingMeow;
 
@@ -71,9 +74,13 @@ public class PlayerController : MonoBehaviour
 
         timeSinceMeow += Time.deltaTime;
         if (timeSinceMeow > 10 && !playingMeow) {
-            audioSource.Play();
+            int meowToPlay = UnityEngine.Random.Range(0,2);
+            if (meowToPlay == 0) audioSource.PlayOneShot(lorenzoMeow1);
+            else audioSource.PlayOneShot(lorenzoMeow2);
+
+            if (idleTime > 10 ) audioSource.PlayOneShot(lorenzoPurring);
             playingMeow = true;
-            timeSinceMeow = 0;
+            timeSinceMeow = UnityEngine.Random.Range(-5, 0);
         }
         else playingMeow = false;
     }
