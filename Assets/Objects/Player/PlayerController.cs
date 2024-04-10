@@ -14,6 +14,7 @@ public class PlayerController : MonoBehaviour
     private bool jumping;
     private bool ignorePlatform;
     private float idleTime;
+    private float relativeVelocity;
     public Animator animator;
     public AudioSource audioSource;
     public AudioClip lorenzoMeow1;
@@ -44,7 +45,7 @@ public class PlayerController : MonoBehaviour
 
         if (rb.velocity.x < 0) GetComponent<SpriteRenderer>().flipX = true;
         else if (rb.velocity.x > 0) GetComponent<SpriteRenderer>().flipX = false;
-        animator.SetFloat("Speed", Math.Abs(rb.velocity.x));
+        animator.SetFloat("Speed", Math.Abs(relativeVelocity));
         animator.SetBool("OnGround", touchingGround);
         animator.SetFloat("IdleTime", idleTime);
     }
@@ -56,6 +57,11 @@ public class PlayerController : MonoBehaviour
         if (touchingGround) 
         {
             rb.velocity = movementDirection * groundSpeed;
+            if (transform.parent != null) {
+                rb.velocity += transform.parent.GetComponent<Rigidbody2D>().velocity;
+                relativeVelocity = (rb.velocity - transform.parent.GetComponent<Rigidbody2D>().velocity).magnitude;
+            }
+            else relativeVelocity = rb.velocity.magnitude;
             if (jumping) force += Vector2.up * jumpForce;
         }
         else force += movementDirection * airMovementForce;
@@ -101,6 +107,12 @@ public class PlayerController : MonoBehaviour
         Vector2 normal = other.GetContact(0).normal;
         if (other.gameObject.CompareTag("Ground") && normal == Vector2.up) {
             touchingGround = true;
+        }
+        if (other.gameObject.CompareTag("Ground") && normal == Vector2.left && jumping) {
+            rb.velocity = new Vector2(-3, 5);
+        }
+        if (other.gameObject.CompareTag("Ground") && normal == Vector2.right && jumping) {
+            rb.velocity = new Vector2(3, 5);
         }
     }
 
