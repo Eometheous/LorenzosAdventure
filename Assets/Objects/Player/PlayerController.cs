@@ -88,10 +88,10 @@ public class PlayerController : MonoBehaviour
         if (other.gameObject.CompareTag("Ground") && normal == Vector2.up) {
             touchingGround = true;
         }
-        if (other.gameObject.CompareTag("Wall") && normal == Vector2.left && jumping) {
+        if (other.gameObject.CompareTag("Ground") && normal == Vector2.left && jumping) {
             rb.velocity = new Vector2(-3, 5);
         }
-        if (other.gameObject.CompareTag("Wall") && normal == Vector2.right && jumping) {
+        if (other.gameObject.CompareTag("Ground") && normal == Vector2.right && jumping) {
             rb.velocity = new Vector2(3, 5);
         }
     }
