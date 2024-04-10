@@ -6,7 +6,7 @@ public class PlayerController : MonoBehaviour
 {
     private readonly float groundSpeed = 5f;
     private readonly float airMovementForce = 4f;
-    private readonly float jumpForce = 250f;
+    private readonly float jumpForce = 275f;
     private readonly float jumpForceAir = 7f;
     public Rigidbody2D rb;
     private Vector2 movementDirection;
@@ -39,7 +39,8 @@ public class PlayerController : MonoBehaviour
     {
         movementDirection = new Vector2(Input.GetAxis("Horizontal"), 0);
         
-        jumping = Input.GetAxis("Vertical") > 0;
+        if (Input.GetKeyDown(KeyCode.W)) jumping = true;
+        if (Input.GetKeyUp(KeyCode.W)) jumping = false;
 
         if (rb.velocity.x < 0) GetComponent<SpriteRenderer>().flipX = true;
         else if (rb.velocity.x > 0) GetComponent<SpriteRenderer>().flipX = false;
@@ -54,12 +55,12 @@ public class PlayerController : MonoBehaviour
         
         if (touchingGround) 
         {
-            // force += movementDirection * groundSpeed;
             rb.velocity = movementDirection * groundSpeed;
             if (jumping) force += Vector2.up * jumpForce;
         }
         else force += movementDirection * airMovementForce;
         rb.AddForce(force);
+
         if (jumping && rb.velocity.y > 0) rb.AddForce(Vector2.up * jumpForceAir);
         
         ignorePlatform = rb.velocity.y > 0 || Input.GetAxis("Vertical") < 0; 
@@ -74,7 +75,7 @@ public class PlayerController : MonoBehaviour
             if (meowToPlay == 0) audioSource.PlayOneShot(lorenzoMeow1);
             else audioSource.PlayOneShot(lorenzoMeow2);
 
-            if (idleTime > 10 ) audioSource.PlayOneShot(lorenzoPurring);
+            if (idleTime > 4 ) audioSource.PlayOneShot(lorenzoPurring);
             playingMeow = true;
             timeSinceMeow = UnityEngine.Random.Range(-5, 0);
         }
@@ -86,6 +87,12 @@ public class PlayerController : MonoBehaviour
         Vector2 normal = other.GetContact(0).normal;
         if (other.gameObject.CompareTag("Ground") && normal == Vector2.up) {
             touchingGround = true;
+        }
+        if (other.gameObject.CompareTag("Wall") && normal == Vector2.left && jumping) {
+            rb.velocity = new Vector2(-3, 5);
+        }
+        if (other.gameObject.CompareTag("Wall") && normal == Vector2.right && jumping) {
+            rb.velocity = new Vector2(3, 5);
         }
     }
 
