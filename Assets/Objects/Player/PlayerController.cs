@@ -21,6 +21,8 @@ public class PlayerController : MonoBehaviour
     public AudioClip lorenzoMeow1;
     public AudioClip lorenzoMeow2;
     public AudioClip lorenzoPurring;
+    public AudioClip lorenzoJump1;
+    public AudioClip lorenzoJump2;
     private float timeSinceMeow;
     private bool playingMeow;
 
@@ -83,15 +85,30 @@ public class PlayerController : MonoBehaviour
 
         timeSinceMeow += Time.deltaTime;
         if (timeSinceMeow > 10 && !playingMeow) {
-            int meowToPlay = UnityEngine.Random.Range(0,2);
-            if (meowToPlay == 0) audioSource.PlayOneShot(lorenzoMeow1);
-            else audioSource.PlayOneShot(lorenzoMeow2);
-
+            audioSource.volume = 1;
+            PlayMeowSound();
             if (idleTime > 4 ) audioSource.PlayOneShot(lorenzoPurring);
             playingMeow = true;
             timeSinceMeow = UnityEngine.Random.Range(-5, 0);
         }
         else playingMeow = false;
+
+        if (jumping  && touchingGround) {
+            PlayJumpSound();
+        }
+    }
+
+    private void PlayJumpSound() {
+        audioSource.volume = .05f;
+        int jumpToPlay = UnityEngine.Random.Range(0,2);
+        if (jumpToPlay == 0) audioSource.PlayOneShot(lorenzoJump1);
+        else audioSource.PlayOneShot(lorenzoJump2);
+    }
+
+    private void PlayMeowSound() {
+        int meowToPlay = UnityEngine.Random.Range(0,2);
+        if (meowToPlay == 0) audioSource.PlayOneShot(lorenzoMeow1);
+        else audioSource.PlayOneShot(lorenzoMeow2);
     }
     
     private void OnCollisionEnter2D(Collision2D other)
@@ -103,9 +120,11 @@ public class PlayerController : MonoBehaviour
             }
             if (other.gameObject.CompareTag("Ground") && normal.x == -1 && jumping) {
                 rb.velocity = new Vector2(-3, 5);
+                PlayJumpSound();
             }
             if (other.gameObject.CompareTag("Ground") && normal.x == 1 && jumping) {
                 rb.velocity = new Vector2(3, 5);
+                PlayJumpSound();
             }
         }
     }
@@ -119,9 +138,11 @@ public class PlayerController : MonoBehaviour
             }
             if (other.gameObject.CompareTag("Ground") && normal.x == -1 && jumping) {
                 rb.velocity = new Vector2(-3, 5);
+                PlayJumpSound();
             }
             if (other.gameObject.CompareTag("Ground") && normal.x == 1 && jumping) {
                 rb.velocity = new Vector2(3, 5);
+                PlayJumpSound();
             }
         }
     }

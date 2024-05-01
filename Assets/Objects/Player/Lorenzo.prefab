@@ -181,11 +181,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rb: {fileID: 0}
+  touchingGround: 0
+  jumping: 0
+  jumpingDown: 0
+  ignorePlatform: 0
   animator: {fileID: 0}
   audioSource: {fileID: 0}
   lorenzoMeow1: {fileID: 8300000, guid: 59a88becfdd324182a731e243cdedae4, type: 3}
   lorenzoMeow2: {fileID: 8300000, guid: b39154d2eeabf4ac0823d47c108fcd87, type: 3}
   lorenzoPurring: {fileID: 8300000, guid: 5aac4c5b005a1412e90cf2fe5810f800, type: 3}
+  lorenzoJump1: {fileID: 8300000, guid: eb264adc6ddde45c2942fef8382ef1d0, type: 3}
+  lorenzoJump2: {fileID: 8300000, guid: 4f17bf092cc5943bfa4ac33da6920e7d, type: 3}
+  phasingThroughPlatform: 0
 --- !u!95 &6313289942206652788
 Animator:
   serializedVersion: 5
