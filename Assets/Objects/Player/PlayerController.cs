@@ -10,9 +10,10 @@ public class PlayerController : MonoBehaviour
     private readonly float jumpForceAir = 7f;
     public Rigidbody2D rb;
     private Vector2 movementDirection;
-    private bool touchingGround;
-    private bool jumping;
-    private bool ignorePlatform;
+    public bool touchingGround;
+    public bool jumping;
+    public bool jumpingDown;
+    public bool ignorePlatform;
     private float idleTime;
     private float relativeVelocity;
     public Animator animator;
@@ -22,6 +23,8 @@ public class PlayerController : MonoBehaviour
     public AudioClip lorenzoPurring;
     private float timeSinceMeow;
     private bool playingMeow;
+
+    public bool phasingThroughPlatform;
 
     // Start is called before the first frame update
     void Start()
@@ -42,6 +45,8 @@ public class PlayerController : MonoBehaviour
         
         if (Input.GetKeyDown(KeyCode.W)) jumping = true;
         if (Input.GetKeyUp(KeyCode.W)) jumping = false;
+        if (Input.GetKeyDown(KeyCode.S)) jumpingDown = true;
+        if (Input.GetKeyUp(KeyCode.S)) jumpingDown = false;
 
         if (rb.velocity.x < 0) GetComponent<SpriteRenderer>().flipX = true;
         else if (rb.velocity.x > 0) GetComponent<SpriteRenderer>().flipX = false;
@@ -69,8 +74,9 @@ public class PlayerController : MonoBehaviour
 
         if (jumping && rb.velocity.y > 0) rb.AddForce(Vector2.up * jumpForceAir);
         
-        ignorePlatform = rb.velocity.y > 0 || Input.GetAxis("Vertical") < 0; 
-        Physics2D.IgnoreLayerCollision(6, 7, ignorePlatform);
+        ignorePlatform = rb.velocity.y > 0 || jumpingDown;
+
+        if (!phasingThroughPlatform) Physics2D.IgnoreLayerCollision(6, 7, ignorePlatform);
 
         idleTime += Time.deltaTime;
         if (math.abs(rb.velocity.x) > 0 || math.abs(rb.velocity.y) > 0) idleTime = 0;
@@ -90,34 +96,48 @@ public class PlayerController : MonoBehaviour
     
     private void OnCollisionEnter2D(Collision2D other)
     {
-        Vector2 normal = other.GetContact(0).normal;
-        if (other.gameObject.CompareTag("Ground") && normal == Vector2.up) {
-            touchingGround = true;
-        }
-        if (other.gameObject.CompareTag("Ground") && normal == Vector2.left && jumping) {
-            rb.velocity = new Vector2(-3, 5);
-        }
-        if (other.gameObject.CompareTag("Ground") && normal == Vector2.right && jumping) {
-            rb.velocity = new Vector2(3, 5);
+        for (int i = 0; i < other.contactCount; i++) {
+            Vector2 normal = other.GetContact(i).normal;
+            if (other.gameObject.CompareTag("Ground") && normal == Vector2.up) {
+                touchingGround = true;
+            }
+            if (other.gameObject.CompareTag("Ground") && normal == Vector2.left && jumping) {
+                rb.velocity = new Vector2(-3, 5);
+            }
+            if (other.gameObject.CompareTag("Ground") && normal == Vector2.right && jumping) {
+                rb.velocity = new Vector2(3, 5);
+            }
         }
     }
 
     private void OnCollisionStay2D(Collision2D other)
     {
-        Vector2 normal = other.GetContact(0).normal;
-        if (other.gameObject.CompareTag("Ground") && normal == Vector2.up) {
-            touchingGround = true;
-        }
-        if (other.gameObject.CompareTag("Ground") && normal == Vector2.left && jumping) {
-            rb.velocity = new Vector2(-3, 5);
-        }
-        if (other.gameObject.CompareTag("Ground") && normal == Vector2.right && jumping) {
-            rb.velocity = new Vector2(3, 5);
+        for (int i = 0; i < other.contactCount; i++) {
+            Vector2 normal = other.GetContact(i).normal;
+            if (other.gameObject.CompareTag("Ground") && normal.y == 1) {
+                touchingGround = true;
+            }
+            if (other.gameObject.CompareTag("Ground") && normal == Vector2.left && jumping) {
+                rb.velocity = new Vector2(-3, 5);
+            }
+            if (other.gameObject.CompareTag("Ground") && normal == Vector2.right && jumping) {
+                rb.velocity = new Vector2(3, 5);
+            }
         }
     }
 
     private void OnCollisionExit2D(Collision2D other) 
     {
         if (other.gameObject.CompareTag("Ground")) touchingGround = false;
+    }
+
+    private void OnTriggerEnter2D(Collider2D other) {
+        if (other.gameObject.CompareTag("platform") && jumpingDown) phasingThroughPlatform = true;
+    }
+    private void OnTriggerStay2D(Collider2D other) {
+        if (other.gameObject.CompareTag("platform") && jumpingDown) phasingThroughPlatform = true;
+    }
+    private void OnTriggerExit2D(Collider2D other) {
+        if (other.gameObject.CompareTag("platform")) phasingThroughPlatform = false;
     }
 }
