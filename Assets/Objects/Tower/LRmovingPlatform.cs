@@ -17,7 +17,7 @@ public class MovingPlatform : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         // left = rb.velocity.x > 0;
         rb.velocity = rb.velocity.normalized * speed;
