@@ -83,19 +83,18 @@ public class PlayerController : MonoBehaviour
         idleTime += Time.deltaTime;
         if (math.abs(rb.velocity.x) > 0 || math.abs(rb.velocity.y) > 0) idleTime = 0;
 
+        if (jumping  && touchingGround) {
+            PlayJumpSound();
+        }
+
         timeSinceMeow += Time.deltaTime;
         if (timeSinceMeow > 10 && !playingMeow) {
-            audioSource.volume = 1;
             PlayMeowSound();
             if (idleTime > 4 ) audioSource.PlayOneShot(lorenzoPurring);
             playingMeow = true;
             timeSinceMeow = UnityEngine.Random.Range(-5, 0);
         }
         else playingMeow = false;
-
-        if (jumping  && touchingGround) {
-            PlayJumpSound();
-        }
     }
 
     private void PlayJumpSound() {
@@ -106,6 +105,7 @@ public class PlayerController : MonoBehaviour
     }
 
     private void PlayMeowSound() {
+        audioSource.volume = 1;
         int meowToPlay = UnityEngine.Random.Range(0,2);
         if (meowToPlay == 0) audioSource.PlayOneShot(lorenzoMeow1);
         else audioSource.PlayOneShot(lorenzoMeow2);
@@ -138,10 +138,12 @@ public class PlayerController : MonoBehaviour
             }
             if (other.gameObject.CompareTag("Ground") && normal.x == -1 && jumping) {
                 rb.velocity = new Vector2(-3, 5);
+                touchingGround = false;
                 PlayJumpSound();
             }
             if (other.gameObject.CompareTag("Ground") && normal.x == 1 && jumping) {
                 rb.velocity = new Vector2(3, 5);
+                touchingGround = false;
                 PlayJumpSound();
             }
         }
@@ -154,9 +156,12 @@ public class PlayerController : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other) {
         if (other.gameObject.CompareTag("platform") && jumpingDown) phasingThroughPlatform = true;
+        if (other.gameObject.CompareTag("platform") && !touchingGround) phasingThroughPlatform = true;
+
     }
     private void OnTriggerStay2D(Collider2D other) {
         if (other.gameObject.CompareTag("platform") && jumpingDown) phasingThroughPlatform = true;
+        if (other.gameObject.CompareTag("platform") && touchingGround) phasingThroughPlatform = false;
     }
     private void OnTriggerExit2D(Collider2D other) {
         if (other.gameObject.CompareTag("platform")) phasingThroughPlatform = false;
