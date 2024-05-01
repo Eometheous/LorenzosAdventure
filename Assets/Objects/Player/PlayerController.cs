@@ -98,13 +98,13 @@ public class PlayerController : MonoBehaviour
     {
         for (int i = 0; i < other.contactCount; i++) {
             Vector2 normal = other.GetContact(i).normal;
-            if (other.gameObject.CompareTag("Ground") && normal == Vector2.up) {
+            if (other.gameObject.CompareTag("Ground") && normal.y == 1) {
                 touchingGround = true;
             }
-            if (other.gameObject.CompareTag("Ground") && normal == Vector2.left && jumping) {
+            if (other.gameObject.CompareTag("Ground") && normal.x == -1 && jumping) {
                 rb.velocity = new Vector2(-3, 5);
             }
-            if (other.gameObject.CompareTag("Ground") && normal == Vector2.right && jumping) {
+            if (other.gameObject.CompareTag("Ground") && normal.x == 1 && jumping) {
                 rb.velocity = new Vector2(3, 5);
             }
         }
@@ -117,10 +117,10 @@ public class PlayerController : MonoBehaviour
             if (other.gameObject.CompareTag("Ground") && normal.y == 1) {
                 touchingGround = true;
             }
-            if (other.gameObject.CompareTag("Ground") && normal == Vector2.left && jumping) {
+            if (other.gameObject.CompareTag("Ground") && normal.x == -1 && jumping) {
                 rb.velocity = new Vector2(-3, 5);
             }
-            if (other.gameObject.CompareTag("Ground") && normal == Vector2.right && jumping) {
+            if (other.gameObject.CompareTag("Ground") && normal.x == 1 && jumping) {
                 rb.velocity = new Vector2(3, 5);
             }
         }
