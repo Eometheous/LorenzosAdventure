@@ -21,4 +21,8 @@ public class LevelSwitcher : MonoBehaviour
             SceneManager.LoadScene(level);
         }
     }
+
+    public void levelSelection(int level) {
+        SceneManager.LoadScene(level);
+    }
 }

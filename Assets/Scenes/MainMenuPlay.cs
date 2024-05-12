@@ -9,7 +9,7 @@ public class MainMenuPlay : MonoBehaviour
 {
     public void LoadFirstLevel()
     {
-       SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+       SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 2);
     }
 
 
