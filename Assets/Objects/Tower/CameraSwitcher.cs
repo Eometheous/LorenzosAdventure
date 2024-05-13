@@ -8,6 +8,11 @@ public class CameraSwitcher : MonoBehaviour
 
     public bool updown = false;
 
+    public void Start()
+    {
+        camera2.gameObject.SetActive(false);
+    }
+
     public void OnTriggerStay2D(Collider2D other) 
     {
         if (other.CompareTag("Player"))
