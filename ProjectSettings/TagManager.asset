@@ -7,6 +7,7 @@ TagManager:
   - Ground
   - platform
   - Bounds
+  - Spike
   layers:
   - Default
   - TransparentFX
