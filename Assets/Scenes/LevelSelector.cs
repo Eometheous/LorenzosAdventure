@@ -8,7 +8,7 @@ public class LevelSelector : MonoBehaviour
 
     public void LoadLevelPicker()
     {
-       SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+       SceneManager.LoadScene("LevelSelectorScene");
     }
 
 
