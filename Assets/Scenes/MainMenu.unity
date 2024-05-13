@@ -349,6 +349,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4443389702940057828, guid: d1d6412d3debd44749d207df9523473c, type: 3}
+      propertyPath: tower
+      value: 
+      objectReference: {fileID: 8300000, guid: e5c6784a7abaf4dc8954b9ed7c62ccba, type: 3}
+    - target: {fileID: 4443389702940057828, guid: d1d6412d3debd44749d207df9523473c, type: 3}
+      propertyPath: victory
+      value: 
+      objectReference: {fileID: 8300000, guid: d8c90ac17060c47f384eb2d827ca8ad8, type: 3}
+    - target: {fileID: 4443389702940057828, guid: d1d6412d3debd44749d207df9523473c, type: 3}
+      propertyPath: mainMenu
+      value: 
+      objectReference: {fileID: 8300000, guid: 2c4864f5cddd44a488fa52a77c56316c, type: 3}
     - target: {fileID: 6859480451809351703, guid: d1d6412d3debd44749d207df9523473c, type: 3}
       propertyPath: m_audioClip
       value: 
