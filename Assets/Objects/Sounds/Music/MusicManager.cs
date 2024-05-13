@@ -43,14 +43,14 @@ public class MusicManager : MonoBehaviour
                 isTowerPlaying = false;
                 isVictoryPlaying = false;
             }
-            else if (level >= 2 && level < 10 && !isTowerPlaying) 
+            else if (level >= 2 && level < 13 && !isTowerPlaying) 
             {
                 ChangeMusic(tower);
                 isTowerPlaying = true;
                 isMainMenuPlaying = false;
                 isVictoryPlaying = false;
             }
-            else if (level == 10 && !isVictoryPlaying)
+            else if (level == 13 && !isVictoryPlaying)
             {
                 ChangeMusic(victory);
                 isVictoryPlaying = true;
