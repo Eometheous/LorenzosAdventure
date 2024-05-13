@@ -18,6 +18,12 @@ EditorBuildSettings:
     path: Assets/Scenes/Level1.unity
     guid: da49786c3862b4e18ae70b5a04b99cf1
   - enabled: 1
+    path: Assets/Scenes/JeffreyLevel1.unity
+    guid: 549c8dfba8dee4a24be5a7a4336e6962
+  - enabled: 1
+    path: Assets/Scenes/JeffreyLevel2.unity
+    guid: 984f56a483cf14de88bbbd6dc9a9e472
+  - enabled: 1
     path: Assets/Scenes/Level2.unity
     guid: c2fa80a65fe5c42b89a884dc4423f17c
   - enabled: 1
