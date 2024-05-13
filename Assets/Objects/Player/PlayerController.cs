@@ -45,8 +45,8 @@ public class PlayerController : MonoBehaviour
     {
         movementDirection = new Vector2(Input.GetAxis("Horizontal"), 0);
         
-        if (Input.GetKeyDown(KeyCode.W)) jumping = true;
-        if (Input.GetKeyUp(KeyCode.W)) jumping = false;
+        if (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.Space)) jumping = true;
+        if (Input.GetKeyUp(KeyCode.W) || Input.GetKeyUp(KeyCode.Space)) jumping = false;
         if (Input.GetKeyDown(KeyCode.S)) jumpingDown = true;
         if (Input.GetKeyUp(KeyCode.S)) jumpingDown = false;
 
